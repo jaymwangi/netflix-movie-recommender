@@ -16,16 +16,22 @@ def get_movie_poster(movie_id):
     else:
         return None
 
-# Load the recommendation system from the pickled file
-with open('recommendation_system.pkl', 'rb') as f:
-    recommendation_system = pickle.load(f)
+# Load the recommendation system components from the pickled files
+with open('cosine_sim.pkl', 'rb') as f:
+    cosine_sim = pickle.load(f)
+
+with open('movie_list.pkl', 'rb') as f:
+    movie_list = pickle.load(f)
+
+with open('movie_id_mapping.pkl', 'rb') as f:
+    movie_id_mapping = pickle.load(f)
 
 # Function to retrieve similar movies with posters
 def get_similar_movies_with_posters(movie_title):
-    similar_movies = get_similar_movies(movie_title, recommendation_system['cosine_sim'], recommendation_system['movie_list'])
+    similar_movies = get_similar_movies(movie_title, cosine_sim, movie_list)
     movie_posters = {}
     for movie in similar_movies:
-        movie_id = recommendation_system['movie_id_mapping'].get(movie)
+        movie_id = movie_id_mapping.get(movie)
         if movie_id:
             poster_url = get_movie_poster(movie_id)
             if poster_url:
@@ -34,7 +40,7 @@ def get_similar_movies_with_posters(movie_title):
 
 # Function to get tagline of selected movie
 def get_movie_tagline(movie_title):
-    movie_id = recommendation_system['movie_id_mapping'].get(movie_title)
+    movie_id = movie_id_mapping.get(movie_title)
     if movie_id:
         api_key = "c3f7575654e6dcad50266adcf6316cc9"
         url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
@@ -48,7 +54,7 @@ def get_movie_tagline(movie_title):
 st.title('Movie Recommendation System')
 
 # Get the selected movie from the user
-selected_movie = st.selectbox('Select a movie:', recommendation_system['movie_list'])
+selected_movie = st.selectbox('Select a movie:', movie_list)
 
 # Button to trigger the recommendations
 if st.button('Get Recommendations'):
