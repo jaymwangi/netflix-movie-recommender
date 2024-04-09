@@ -115,3 +115,4 @@ if st.button('Get Recommendations'):
     # Display message if no movie selected
     else:
         st.write('Please select a movie.')
+
