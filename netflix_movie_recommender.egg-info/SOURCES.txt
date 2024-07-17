@@ -1,0 +1,6 @@
+setup.py
+netflix_movie_recommender.egg-info/PKG-INFO
+netflix_movie_recommender.egg-info/SOURCES.txt
+netflix_movie_recommender.egg-info/dependency_links.txt
+netflix_movie_recommender.egg-info/requires.txt
+netflix_movie_recommender.egg-info/top_level.txt
