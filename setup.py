@@ -126,7 +126,7 @@ requirements = [
     'scipy==1.12.0',
     'seaborn==0.13.0',
     'Send2Trash==1.8.2',
-    'setuptools==69.0.1',
+    'setuptools>=69.0.1',  # Updated version requirement
     'six==1.16.0',
     'smmap==5.0.1',
     'sniffio==1.3.1',
